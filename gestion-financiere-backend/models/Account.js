@@ -1,3 +1,4 @@
+// models/Account.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const User = require('./User');
@@ -12,6 +13,11 @@ const Account = sequelize.define('Account', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    initial_balance: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        defaultValue: 0
+    },
     balance: {
         type: DataTypes.FLOAT,
         allowNull: false,
@@ -19,15 +25,22 @@ const Account = sequelize.define('Account', {
     },
     currency: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 'EUR'
     },
     description: {
         type: DataTypes.TEXT
+    },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
+}, {
+    timestamps: true
 });
 
-// Relation entre User et Account
-Account.belongsTo(User, { foreignKey: 'userId', as: 'user' });
-User.hasMany(Account, { foreignKey: 'userId', as: 'accounts' });
+// Association avec l'utilisateur
+Account.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Account, { foreignKey: 'user_id' });
 
 module.exports = Account;

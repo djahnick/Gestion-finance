@@ -1,0 +1,65 @@
+<!-- src/app/components/dashboard/dashboard.component.html -->
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened>
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <mat-list-item routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        <span>Tableau de Bord</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <button mat-button (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        Déconnexion
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <span>Tableau de Bord</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="openAccountDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <div class="account-list">
+      <mat-card *ngFor="let account of accounts" class="account-card">
+        <mat-card-header>
+          <mat-card-title>{{ account.name }}</mat-card-title>
+          <mat-card-subtitle>
+            Solde : {{ account.balance }} {{ account.currency }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ account.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-icon-button
+            matTooltip="Voir"
+            (click)="navigateToTransactions(account.id)"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            matTooltip="Modifier"
+            (click)="openAccountDialog(account)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            matTooltip="Supprimer"
+            (click)="deleteAccount(account.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

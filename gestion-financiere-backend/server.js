@@ -1,11 +1,13 @@
+// server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const financeRoutes = require('./routes/financeRoutes');
-const bcrypt = require('bcryptjs'); // Pour hacher le mot de passe
-const User = require('./models/User'); // Le modèle User
+const bcrypt = require('bcryptjs');
+const User = require('./models/User');
+require('dotenv').config();
 
 const app = express();
 
@@ -18,14 +20,11 @@ app.use('/finance', financeRoutes);
 // Fonction pour initialiser un utilisateur par défaut
 const initializeDefaultUser = async () => {
     try {
-        // Vérifiez si l'utilisateur par défaut existe déjà
         const defaultUser = await User.findOne({ where: { email: 'admin@example.com' } });
 
         if (!defaultUser) {
-            // Hachez le mot de passe par défaut
             const hashedPassword = await bcrypt.hash('adminpassword', 10);
 
-            // Créez l'utilisateur par défaut
             await User.create({
                 email: 'admin@example.com',
                 password: hashedPassword
@@ -47,4 +46,6 @@ sequelize.sync().then(async () => {
     app.listen(3000, () => {
         console.log('Le serveur tourne sur le port 3000');
     });
+}).catch(error => {
+    console.error('Impossible de se connecter à la base de données :', error);
 });
