@@ -3,23 +3,32 @@ const Account = require('../models/Account');
 const Transaction = require('../models/Transaction');
 
 // Créer un compte
+// controllers/financeController.js
 exports.createAccount = async (req, res) => {
-    const { name, initial_balance, currency, description } = req.body;
-
     try {
-        const account = await Account.create({
+        const { name, initial_balance, currency, description } = req.body;
+
+        // Assurez-vous que les champs obligatoires sont présents
+        if (!name || initial_balance === undefined || !currency) {
+            return res.status(400).json({ message: "Tous les champs obligatoires ne sont pas remplis" });
+        }
+
+        // Création du compte dans la base de données avec l'ID de l'utilisateur authentifié
+        const newAccount = await Account.create({
             name,
-            initial_balance,
-            balance: initial_balance, // Le solde commence avec le solde initial
+            balance: initial_balance,
             currency,
             description,
-            user_id: req.userId // ID de l'utilisateur connecté
+            user_id: req.userId // Associer le compte à l'utilisateur connecté
         });
-        res.status(201).json(account);
+
+        res.status(201).json(newAccount);
     } catch (error) {
-        res.status(500).json({ message: 'Erreur serveur', error });
+        console.error("Erreur lors de la création du compte : ", error);
+        res.status(500).json({ message: "Erreur serveur", error });
     }
 };
+
 
 // Récupérer tous les comptes d'un utilisateur
 exports.getAccounts = async (req, res) => {
