@@ -1,19 +1,23 @@
+/* src/app/app.component.css */
 .sidenav-container {
-  height: 100vh;
+  height: 100%;
 }
 
-mat-sidenav {
+.mat-sidenav {
   width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Aligne les éléments entre le haut et le bas */
 }
 
-mat-sidenav-content {
+.mat-sidenav-content {
   padding: 20px;
 }
 
-mat-nav-list {
-  width: 100%;
+.logout-section {
+  padding: 16px;
 }
 
-mat-list-item {
-  cursor: pointer;
+.active-link {
+  font-weight: bold;
 }

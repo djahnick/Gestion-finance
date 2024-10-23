@@ -1,46 +1,44 @@
-<div class="account-list">
-    <mat-card *ngFor="let account of accounts" class="account-card">
-        <mat-card-header>
-            <mat-card-title>{{ account.name }}</mat-card-title>
-            <mat-card-subtitle>
-                Solde : {{ account.balance | currency: account.currency }}
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p>{{ account.description }}</p>
-        </mat-card-content>
-        <mat-card-actions>
-            <button
-                    mat-icon-button
-                    matTooltip="Voir les transactions"
-                    (click)="navigateToTransactions(account.id)"
-            >
-                <mat-icon>visibility</mat-icon>
-            </button>
-            <button
-                    mat-icon-button
-                    matTooltip="Modifier le compte"
-                    (click)="openAccountDialog(account)"
-            >
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button
-                    mat-icon-button
-                    matTooltip="Supprimer le compte"
-                    (click)="deleteAccount(account.id)"
-            >
-                <mat-icon>delete</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
-</div>
-
-<!-- Bouton pour ajouter un nouveau compte -->
-<button
-        mat-fab
-        color="primary"
-        class="add-account-button"
-        (click)="openAccountDialog()"
->
+<mat-toolbar color="primary">
+  <span>Tableau de Bord</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="openAccountDialog()">
     <mat-icon>add</mat-icon>
-</button>
+  </button>
+</mat-toolbar>
+
+<div class="account-list">
+  <mat-card *ngFor="let account of accounts" class="account-card">
+    <mat-card-header>
+      <mat-card-title>{{ account.name }}</mat-card-title>
+      <mat-card-subtitle>
+        Solde : {{ account.balance }} {{ account.currency }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ account.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-icon-button
+        matTooltip="Voir"
+        (click)="navigateToTransactions(account.id)"
+      >
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="Modifier"
+        (click)="openAccountDialog(account)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="Supprimer"
+        (click)="deleteAccount(account.id)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
