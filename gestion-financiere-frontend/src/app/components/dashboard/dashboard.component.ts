@@ -1,10 +1,8 @@
-// src/app/components/dashboard/dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { AccountsComponent } from '../accounts/accounts.component';
-import { AuthService } from '../../services/auth.service';
+import { AccountDialogComponent } from '../accounts/account-dialog/account-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,10 +13,9 @@ export class DashboardComponent implements OnInit {
   accounts: any[] = [];
 
   constructor(
-    private accountService: AccountService,
-    private router: Router,
-    public dialog: MatDialog,
-    private authService: AuthService
+      private accountService: AccountService,
+      private router: Router,
+      public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -26,16 +23,22 @@ export class DashboardComponent implements OnInit {
   }
 
   getAccounts() {
-    this.accountService.getAccounts().subscribe((data) => {
-      this.accounts = data;
-    });
+    this.accountService.getAccounts().subscribe(
+        (data) => {
+          this.accounts = data;
+        },
+        (error) => {
+          console.error('Erreur lors de la récupération des comptes', error);
+        }
+    );
   }
+
   navigateToTransactions(accountId: number) {
     this.router.navigate(['/accounts', accountId, 'transactions']);
   }
 
   openAccountDialog(account?: any) {
-    const dialogRef = this.dialog.open(AccountsComponent, {
+    const dialogRef = this.dialog.open(AccountDialogComponent, {
       width: '400px',
       data: account ? account : null,
     });
@@ -48,13 +51,15 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteAccount(id: number) {
-    this.accountService.deleteAccount(id).subscribe(() => {
-      this.getAccounts();
-    });
-  }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    if (confirm('Voulez-vous vraiment supprimer ce compte ?')) {
+      this.accountService.deleteAccount(id).subscribe(
+          () => {
+            this.getAccounts();
+          },
+          (error) => {
+            console.error('Erreur lors de la suppression du compte', error);
+          }
+      );
+    }
   }
 }

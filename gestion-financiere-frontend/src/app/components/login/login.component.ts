@@ -1,4 +1,3 @@
-// src/app/components/login/login.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -14,10 +13,10 @@ export class LoginComponent {
   loginForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-    private snackBar: MatSnackBar
+      private fb: FormBuilder,
+      private authService: AuthService,
+      private router: Router,
+      private snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -28,15 +27,15 @@ export class LoginComponent {
   login() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
-        (data) => {
-          localStorage.setItem('token', data.token);
-          this.router.navigate(['/dashboard']);
-        },
-        (error) => {
-          this.snackBar.open('Email ou mot de passe incorrect', 'Fermer', {
-            duration: 3000,
-          });
-        }
+          (data) => {
+            this.authService.saveToken(data.token);
+            this.router.navigate(['/dashboard']);
+          },
+          (error) => {
+            this.snackBar.open('Email ou mot de passe incorrect', 'Fermer', {
+              duration: 3000,
+            });
+          }
       );
     }
   }

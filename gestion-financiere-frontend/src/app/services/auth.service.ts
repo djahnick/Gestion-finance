@@ -1,9 +1,10 @@
-// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
   private apiUrl = 'http://localhost:3000/auth';
 
@@ -13,15 +14,21 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
-  logout() {
-    localStorage.removeItem('token');
+  saveToken(token: string) {
+    localStorage.setItem('token', token);
   }
 
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  isLoggedIn(): boolean {
+  isAuthenticated(): boolean {
+    // Vérifie si le token existe dans le localStorage
     return !!localStorage.getItem('token');
+  }
+
+  logout() {
+    // Supprime le token du localStorage
+    localStorage.removeItem('token');
   }
 }

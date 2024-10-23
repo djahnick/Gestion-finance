@@ -1,4 +1,3 @@
-// src/app/components/accounts/accounts.component.ts
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
@@ -14,10 +13,10 @@ export class AccountsComponent {
   isEditMode: boolean = false;
 
   constructor(
-    private fb: FormBuilder,
-    private accountService: AccountService,
-    private dialogRef: MatDialogRef<AccountsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+      private fb: FormBuilder,
+      private accountService: AccountService,
+      private dialogRef: MatDialogRef<AccountsComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.isEditMode = !!data;
 
@@ -33,10 +32,10 @@ export class AccountsComponent {
     if (this.accountForm.valid) {
       if (this.isEditMode) {
         this.accountService
-          .updateAccount(this.data.id, this.accountForm.value)
-          .subscribe(() => {
-            this.dialogRef.close(true);
-          });
+            .updateAccount(this.data.id, this.accountForm.value)
+            .subscribe(() => {
+              this.dialogRef.close(true);
+            });
       } else {
         this.accountService.addAccount(this.accountForm.value).subscribe(() => {
           this.dialogRef.close(true);

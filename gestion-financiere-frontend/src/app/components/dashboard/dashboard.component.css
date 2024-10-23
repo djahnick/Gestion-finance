@@ -1,19 +1,17 @@
-/* src/app/components/dashboard/dashboard.component.css */
-.sidenav-container {
-  height: 100%;
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
 .account-list {
   display: flex;
   flex-wrap: wrap;
-  padding: 16px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .account-card {
   width: 300px;
-  margin: 8px;
+  margin: 10px;
+}
+
+.add-account-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }

@@ -1,4 +1,3 @@
-// src/app/components/transactions/transactions.component.ts
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../../services/transaction.service';
 import { ActivatedRoute } from '@angular/router';
@@ -13,18 +12,11 @@ import { TransactionDialogComponent } from './transaction-dialog/transaction-dia
 export class TransactionsComponent implements OnInit {
   accountId!: number;
   transactions: any[] = [];
-  displayedColumns: string[] = [
-    'date',
-    'type',
-    'amount',
-    'description',
-    'actions',
-  ];
 
   constructor(
-    private transactionService: TransactionService,
-    private route: ActivatedRoute,
-    public dialog: MatDialog
+      private transactionService: TransactionService,
+      private route: ActivatedRoute,
+      public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -34,18 +26,18 @@ export class TransactionsComponent implements OnInit {
 
   getTransactions() {
     this.transactionService
-      .getTransactions(this.accountId)
-      .subscribe((data) => {
-        this.transactions = data;
-      });
+        .getTransactions(this.accountId)
+        .subscribe((data) => {
+          this.transactions = data;
+        });
   }
 
   openTransactionDialog(transaction?: any) {
     const dialogRef = this.dialog.open(TransactionDialogComponent, {
       width: '400px',
       data: transaction
-        ? { ...transaction, account_id: this.accountId }
-        : { account_id: this.accountId },
+          ? { ...transaction, account_id: this.accountId }
+          : { account_id: this.accountId },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -56,8 +48,15 @@ export class TransactionsComponent implements OnInit {
   }
 
   deleteTransaction(id: number) {
-    this.transactionService.deleteTransaction(id).subscribe(() => {
-      this.getTransactions();
-    });
+    if (confirm('Voulez-vous vraiment supprimer cette transaction ?')) {
+      this.transactionService.deleteTransaction(id).subscribe(
+          () => {
+            this.getTransactions();
+          },
+          (error) => {
+            console.error('Erreur lors de la suppression de la transaction', error);
+          }
+      );
+    }
   }
 }

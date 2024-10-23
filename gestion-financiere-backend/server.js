@@ -40,12 +40,12 @@ const initializeDefaultUser = async () => {
 };
 
 // Synchroniser la base de données et créer l'utilisateur par défaut
-sequelize.sync().then(async () => {
+sequelize.sync({ force: true }).then(async () => {
     await initializeDefaultUser(); // Initialiser l'utilisateur par défaut
-
     app.listen(3000, () => {
         console.log('Le serveur tourne sur le port 3000');
     });
 }).catch(error => {
     console.error('Impossible de se connecter à la base de données :', error);
 });
+
