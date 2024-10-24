@@ -11,13 +11,13 @@
             <p>{{ account.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-            <button
-                    mat-icon-button
-                    matTooltip="Voir les transactions"
-                    (click)="navigateToTransactions(account.id)"
-            >
-                <mat-icon>visibility</mat-icon>
-            </button>
+          <button
+            mat-icon-button
+            matTooltip="Voir les détails du compte"
+            (click)="navigateToAccountDetails(account.id)"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button>
             <button
                     mat-icon-button
                     matTooltip="Modifier le compte"

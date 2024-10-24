@@ -5,12 +5,18 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AccountDetailsComponent } from './components/accounts/account-details/account-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'accounts/:id',
+    component: AccountDetailsComponent,
     canActivate: [AuthGuard],
   },
   {

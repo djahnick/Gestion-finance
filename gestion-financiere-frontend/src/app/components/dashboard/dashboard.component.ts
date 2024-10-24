@@ -38,6 +38,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/accounts', accountId, 'transactions']);
   }
 
+  navigateToAccountDetails(accountId: number) {
+    this.router.navigate(['/accounts', accountId]);
+  }
+
   openAccountDialog(account?: any) {
     const dialogRef = this.dialog.open(AccountDialogComponent, {
       width: '400px',

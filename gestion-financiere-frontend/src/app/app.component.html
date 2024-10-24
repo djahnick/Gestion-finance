@@ -1,22 +1,32 @@
 <!-- src/app/app.component.html -->
 <mat-sidenav-container class="sidenav-container" *ngIf="isLoggedIn()">
-    <mat-sidenav mode="side" opened>
-        <!-- Contenu de la sidebar -->
-        <mat-nav-list>
-            <a mat-list-item routerLink="/dashboard">Tableau de Bord</a>
-            <!-- Vous pouvez ajouter d'autres liens ici -->
-            <mat-divider></mat-divider>
-            <button mat-button (click)="logout()">Déconnexion</button>
-        </mat-nav-list>
-    </mat-sidenav>
+  <!-- Sidebar -->
+  <mat-sidenav mode="side" opened>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard">Tableau de Bord</a>
+      <!-- Autres liens -->
+      <mat-divider></mat-divider>
+      <button mat-button (click)="logout()">Déconnexion</button>
+    </mat-nav-list>
+  </mat-sidenav>
 
-    <mat-sidenav-content>
-        <!-- Contenu principal -->
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
+  <!-- Contenu principal avec navbar -->
+  <mat-sidenav-content>
+    <!-- Navbar -->
+    <mat-toolbar color="primary">
+      <span>Gestion Financière</span>
+      <span class="spacer"></span>
+
+    </mat-toolbar>
+
+    <!-- Contenu principal sous la navbar -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>
 
-<!-- Si l'utilisateur n'est pas connecté, on affiche simplement le router-outlet -->
+<!-- Si l'utilisateur n'est pas connecté, afficher simplement le contenu principal sans sidebar et navbar -->
 <div *ngIf="!isLoggedIn()">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

@@ -13,10 +13,10 @@ export class TransactionDialogComponent {
   isEditMode: boolean = false;
 
   constructor(
-      private fb: FormBuilder,
-      private transactionService: TransactionService,
-      private dialogRef: MatDialogRef<TransactionDialogComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: any
+    private fb: FormBuilder,
+    private transactionService: TransactionService,
+    private dialogRef: MatDialogRef<TransactionDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.isEditMode = !!data.id;
 
@@ -33,16 +33,26 @@ export class TransactionDialogComponent {
     if (this.transactionForm.valid) {
       if (this.isEditMode) {
         this.transactionService
-            .updateTransaction(this.data.id, this.transactionForm.value)
-            .subscribe(() => {
-              this.dialogRef.close(true);
-            });
+          .updateTransaction(this.data.id, this.transactionForm.value)
+          .subscribe(
+            (updatedTransaction) => {
+              this.dialogRef.close(updatedTransaction); // Retourner la transaction modifiée
+            },
+            (error) => {
+              console.error('Erreur lors de la mise à jour de la transaction', error);
+            }
+          );
       } else {
         this.transactionService
-            .addTransaction(this.transactionForm.value)
-            .subscribe(() => {
-              this.dialogRef.close(true);
-            });
+          .addTransaction(this.transactionForm.value)
+          .subscribe(
+            (newTransaction) => {
+              this.dialogRef.close(newTransaction); // Retourner la nouvelle transaction
+            },
+            (error) => {
+              console.error('Erreur lors de la création de la transaction', error);
+            }
+          );
       }
     }
   }

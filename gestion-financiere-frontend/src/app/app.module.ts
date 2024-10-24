@@ -40,6 +40,7 @@ import { AccountService } from './services/account.service';
 import { TransactionService } from './services/transaction.service';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AccountDetailsComponent } from './components/accounts/account-details/account-details.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     AccountDialogComponent,
     TransactionsComponent,
     TransactionDialogComponent,
+    AccountDetailsComponent,
   ],
   imports: [
     BrowserModule,

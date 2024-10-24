@@ -1,38 +1,38 @@
 <!-- src/app/components/transactions/transaction-dialog/transaction-dialog.component.html -->
 <h2 mat-dialog-title>
-    {{ isEditMode ? 'Modifier la transaction' : 'Ajouter une transaction' }}
+  {{ isEditMode ? 'Modifier la transaction' : 'Ajouter une transaction' }}
 </h2>
 <mat-dialog-content>
-    <form [formGroup]="transactionForm">
-        <mat-form-field appearance="fill">
-            <mat-label>Type</mat-label>
-            <mat-select formControlName="type">
-                <mat-option value="income">Revenu</mat-option>
-                <mat-option value="expense">Dépense</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Montant</mat-label>
-            <input matInput type="number" formControlName="amount" />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Date</mat-label>
-            <input matInput type="date" formControlName="date" />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
-            <textarea matInput formControlName="description"></textarea>
-        </mat-form-field>
-    </form>
+  <form [formGroup]="transactionForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option value="income">Revenu</mat-option>
+        <mat-option value="expense">Dépense</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Montant</mat-label>
+      <input matInput type="number" formControlName="amount" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput type="date" formControlName="date" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button (click)="close()">Annuler</button>
-    <button
-            mat-raised-button
-            color="primary"
-            (click)="saveTransaction()"
-            [disabled]="transactionForm.invalid"
-    >
-        {{ isEditMode ? 'Mettre à jour' : 'Créer' }}
-    </button>
+  <button mat-button (click)="close()">Annuler</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="saveTransaction()"
+    [disabled]="transactionForm.invalid"
+  >
+    {{ isEditMode ? 'Mettre à jour' : 'Ajouter' }}
+  </button>
 </mat-dialog-actions>
