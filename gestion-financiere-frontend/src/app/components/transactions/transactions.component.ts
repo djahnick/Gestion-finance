@@ -1,3 +1,4 @@
+// src/app/components/transactions/transactions.component.ts
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../../services/transaction.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,6 +13,13 @@ import { TransactionDialogComponent } from './transaction-dialog/transaction-dia
 export class TransactionsComponent implements OnInit {
   accountId!: number;
   transactions: any[] = [];
+  displayedColumns: string[] = [
+    'date',
+    'type',
+    'amount',
+    'description',
+    'actions',
+  ];
 
   constructor(
       private transactionService: TransactionService,

@@ -6,7 +6,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { AuthGuard } from './guards/auth.guard';
 
-
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
@@ -19,13 +18,8 @@ const routes: Routes = [
     component: TransactionsComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: 'accounts/:id/transactions',
-    component: TransactionsComponent,
-    canActivate: [AuthGuard],
-  },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: '/dashboard' },
 ];
 
 @NgModule({

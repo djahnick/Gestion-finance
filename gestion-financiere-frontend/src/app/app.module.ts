@@ -1,3 +1,4 @@
+// src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -29,6 +30,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AccountsComponent } from './components/accounts/accounts.component';
+import { AccountDialogComponent } from './components/accounts/account-dialog/account-dialog.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { TransactionDialogComponent } from './components/transactions/transaction-dialog/transaction-dialog.component';
 
@@ -38,7 +40,6 @@ import { AccountService } from './services/account.service';
 import { TransactionService } from './services/transaction.service';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { AccountDialogComponent } from './components/accounts/account-dialog/account-dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,9 +47,9 @@ import { AccountDialogComponent } from './components/accounts/account-dialog/acc
     LoginComponent,
     DashboardComponent,
     AccountsComponent,
+    AccountDialogComponent,
     TransactionsComponent,
     TransactionDialogComponent,
-    AccountDialogComponent,
   ],
   imports: [
     BrowserModule,

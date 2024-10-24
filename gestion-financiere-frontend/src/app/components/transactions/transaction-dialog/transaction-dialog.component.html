@@ -1,3 +1,4 @@
+<!-- src/app/components/transactions/transaction-dialog/transaction-dialog.component.html -->
 <h2 mat-dialog-title>
     {{ isEditMode ? 'Modifier la transaction' : 'Ajouter une transaction' }}
 </h2>
@@ -26,7 +27,12 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button (click)="close()">Annuler</button>
-    <button mat-raised-button color="primary" (click)="saveTransaction()">
-        Sauvegarder
+    <button
+            mat-raised-button
+            color="primary"
+            (click)="saveTransaction()"
+            [disabled]="transactionForm.invalid"
+    >
+        {{ isEditMode ? 'Mettre à jour' : 'Créer' }}
     </button>
 </mat-dialog-actions>

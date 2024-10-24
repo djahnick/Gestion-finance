@@ -1,3 +1,4 @@
+// src/app/components/accounts/account-dialog/account-dialog.component.ts
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../../../services/account.service';
@@ -21,8 +22,14 @@ export class AccountDialogComponent {
 
     this.accountForm = this.fb.group({
       name: [data?.name || '', Validators.required],
-      initial_balance: [{ value: data?.balance || 0, disabled: this.isEditMode }, Validators.required],
-      currency: [{ value: data?.currency || 'EUR', disabled: this.isEditMode }, Validators.required],
+      initial_balance: [
+        { value: data?.balance || 0, disabled: this.isEditMode },
+        Validators.required,
+      ],
+      currency: [
+        { value: data?.currency || 'EUR', disabled: this.isEditMode },
+        Validators.required,
+      ],
       description: [data?.description || ''],
     });
   }
@@ -31,7 +38,7 @@ export class AccountDialogComponent {
     if (this.accountForm.valid) {
       if (this.isEditMode) {
         this.accountService
-          .updateAccount(this.data.id, this.accountForm.getRawValue())  // Utiliser getRawValue() pour inclure les champs désactivés
+          .updateAccount(this.data.id, this.accountForm.getRawValue())
           .subscribe(
             () => {
               this.dialogRef.close(true);

@@ -1,3 +1,4 @@
+// src/app/components/transactions/transaction-dialog/transaction-dialog.component.ts
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TransactionService } from '../../../services/transaction.service';

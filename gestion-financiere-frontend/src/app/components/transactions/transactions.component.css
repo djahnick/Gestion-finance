@@ -1,0 +1,8 @@
+/* src/app/components/transactions/transactions.component.css */
+.transaction-table {
+  margin-top: 20px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
